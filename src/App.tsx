@@ -162,8 +162,8 @@ const Hero = () => (
         </div>
 
         <h1 className="text-[22vw] sm:text-[18vw] lg:text-[12vw] font-bold leading-[0.8] tracking-[-0.04em] text-brand mb-12 sm:mb-16 text-center">
-          PLUMERIA<br />
-          <span className="opacity-20">TECH</span>
+          <span className="text-[14vw] sm:text-[18vw] lg:text-[12vw]">PLUMERIA</span><br />
+          <span className="opacity-20 text-[10vw] sm:text-[14vw] lg:text-[8vw]">TECH</span>
         </h1>
 
         <div className="flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-24">
