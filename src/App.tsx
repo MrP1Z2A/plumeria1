@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Users,
-  Award,
   Calendar,
   Target,
   MessageSquare,
@@ -49,6 +48,17 @@ const RESOURCES = [
   { title: "Remote Culture", type: "Blog", date: "2026", img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&h=1000&auto=format&fit=crop" }
 ];
 
+const DEMO_EMAIL = 'plumerian@gmail.com';
+
+const openDemoEmail = () => {
+  const subject = encodeURIComponent('Request a Demo');
+  const body = encodeURIComponent(
+    "Hello Plumeria,\n\nI'd like to request a demo.\n\nName:\nOrganization:\nPhone:\nPreferred date/time:\n\nThank you."
+  );
+
+  window.location.href = `mailto:${DEMO_EMAIL}?subject=${subject}&body=${body}`;
+};
+
 // --- Components ---
 const ScrollHandler = () => {
   const { pathname, hash } = useLocation();
@@ -72,7 +82,7 @@ const ScrollHandler = () => {
 
 const Logo = ({ className = "" }: { className?: string }) => (
   <a href="#" className={`group ${className}`}>
-    <span className="text-2xl font-display uppercase tracking-tighter text-brand">Plumerian</span>
+    <span className="text-2xl font-display uppercase tracking-tighter text-brand">Plumeria</span>
   </a>
 );
 
@@ -84,7 +94,6 @@ const Navbar = () => {
   const navItems = [
     { name: 'About Us', href: '/#about' },
     { name: 'Services', href: '/#services' },
-    { name: 'Partners', href: '/#partners' },
     { name: 'Resources', href: '/#resources' },
     { name: 'Contact', href: '/#contact', isButton: true },
   ];
@@ -110,14 +119,14 @@ const Navbar = () => {
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 bg-white z-40 p-12 flex flex-col justify-center items-center gap-8"
+            className="fixed inset-0 bg-white z-40 p-8 sm:p-12 flex flex-col justify-center items-center gap-6 sm:gap-8"
           >
-            <button className="absolute top-8 right-6 w-16 h-16 flex items-center justify-center rounded-full bg-white/40 backdrop-blur-xl shadow-[0_8px_16px_rgba(31,38,135,0.05),inset_0_2px_4px_rgba(255,255,255,0.8),inset_0_-2px_4px_rgba(255,255,255,0.2)] border border-white/50 text-ink hover:bg-white/60 transition-all duration-300" onClick={() => setIsOpen(false)}><X size={32} /></button>
+            <button className="absolute top-6 right-4 sm:top-8 sm:right-6 w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center rounded-full bg-white/40 backdrop-blur-xl shadow-[0_8px_16px_rgba(31,38,135,0.05),inset_0_2px_4px_rgba(255,255,255,0.8),inset_0_-2px_4px_rgba(255,255,255,0.2)] border border-white/50 text-ink hover:bg-white/60 transition-all duration-300" onClick={() => setIsOpen(false)}><X size={32} /></button>
             {navItems.map(item => (
               <Link
                 key={item.name}
                 to={item.href}
-                className={`text-4xl font-bold tracking-tight ${item.isButton ? 'px-8 py-3 bg-ink text-white rounded-full text-2xl' : ''}`}
+                className={`text-3xl sm:text-4xl font-bold tracking-tight text-center ${item.isButton ? 'px-6 sm:px-8 py-3 bg-ink text-white rounded-full text-xl sm:text-2xl' : ''}`}
                 onClick={() => setIsOpen(false)}
               >
                 {item.name}
@@ -140,20 +149,20 @@ const Hero = () => (
     </div>
 
     {/* Immersive Content */}
-    <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 text-center">
+    <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-12 text-center">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="flex items-center justify-center gap-3 mb-12">
+        <div className="flex items-center justify-center gap-2 sm:gap-3 mb-10 sm:mb-12">
           <div className="w-1 h-1 bg-brand rounded-full" />
-          <span className="text-[10px] uppercase tracking-[0.5em] text-brand/60 font-mono font-bold">Innovation Collective</span>
+          <span className="text-[10px] uppercase tracking-[0.3em] sm:tracking-[0.5em] text-brand/60 font-mono font-bold">Innovation Collective</span>
           <div className="w-1 h-1 bg-brand rounded-full" />
         </div>
 
-        <h1 className="text-[15vw] lg:text-[12vw] font-bold leading-[0.8] tracking-[-0.04em] text-brand mb-16 text-center">
-          PLUMERIAN<br />
+        <h1 className="text-[22vw] sm:text-[18vw] lg:text-[12vw] font-bold leading-[0.8] tracking-[-0.04em] text-brand mb-12 sm:mb-16 text-center">
+          PLUMERIA<br />
           <span className="opacity-20">TECH</span>
         </h1>
 
@@ -184,7 +193,7 @@ const Hero = () => (
       initial={{ y: 50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ delay: 0.5, duration: 0.8 }}
-      className="absolute bottom-0 left-0 w-full p-8 lg:p-12 flex justify-between items-end z-20"
+      className="absolute bottom-0 left-0 w-full p-5 sm:p-8 lg:p-12 flex justify-between items-end z-20"
     >
 
       <div className="hidden lg:block">
@@ -193,8 +202,8 @@ const Hero = () => (
     </motion.div>
 
     {/* Decorative Elements */}
-    <div className="absolute top-1/4 left-10 w-px h-32 bg-black/10" />
-    <div className="absolute bottom-1/4 right-10 w-px h-32 bg-black/10" />
+    <div className="absolute top-1/4 left-10 w-px h-32 bg-black/10 hidden lg:block" />
+    <div className="absolute bottom-1/4 right-10 w-px h-32 bg-black/10 hidden lg:block" />
   </section>
 );
 
@@ -310,21 +319,20 @@ const VideoFromImage = ({ imageUrl }: { imageUrl: string }) => {
 };
 
 const About = () => (
-  <section id="about" className="py-24 lg:py-48 px-6 lg:px-12">
+  <section id="about" className="py-20 sm:py-24 lg:py-48 px-6 lg:px-12">
     <div className="grid lg:grid-cols-12 gap-12 lg:gap-24">
       <div className="lg:col-span-5">
         <p className="micro-label mb-8">About Us</p>
-        <h2 className="text-6xl lg:text-8xl font-display uppercase leading-none mb-12">
+        <h2 className="text-4xl sm:text-5xl lg:text-8xl font-display uppercase leading-none mb-10 sm:mb-12">
           The <span className="text-brand">Integrity</span> <br /> of Code.
         </h2>
-        <div className="space-y-12">
+        <div className="space-y-8 sm:space-y-12">
           {[
             { label: 'Leadership', desc: 'Guided by industry veterans with a passion for disruptive innovation.', href: '/leadership' },
             { label: 'Who We Service', desc: 'From academic institutions to Fortune 500 companies.', href: '/who-we-service' },
-            { label: 'Awards', desc: 'Recognized globally for contributions to EdTech.', href: '/awards' },
             { label: 'Events', desc: 'Annual tech summits and workshops for digital leaders.', href: '/events' }
           ].map(item => (
-            <div key={item.label} className="group border-t border-ink/10 pt-8">
+            <div key={item.label} className="group border-t border-ink/10 pt-6 sm:pt-8">
               {item.href ? (
                 <Link to={item.href} className="block">
                   <h4 className="text-xs font-mono uppercase tracking-widest mb-4 flex justify-between items-center group-hover:text-brand transition-colors">
@@ -341,23 +349,23 @@ const About = () => (
           ))}
         </div>
       </div>
-      <div className="lg:col-span-7 flex flex-col gap-12">
+      <div className="lg:col-span-7 flex flex-col gap-6 sm:gap-12">
         <div className="aspect-[16/9] bg-slate-100 rounded-sm overflow-hidden">
           <iframe
             className="w-full h-full border-0"
-            src="https://www.youtube.com/embed/jMXsJZ5kcKk"
+            src="https://www.youtube.com/embed/ayiT2Ywv1Aw"
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
           ></iframe>
         </div>
-        <div className="grid grid-cols-2 gap-12">
-          <div className="aspect-square bg-brand-light p-12 flex flex-col justify-end">
-            <p className="text-6xl font-display">EdTech</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-12">
+          <div className="aspect-square bg-brand-light p-6 sm:p-12 flex flex-col justify-end">
+            <p className="text-4xl sm:text-6xl font-display">EdTech</p>
             <p className="micro-label">We build for education</p>
           </div>
-          <div className="aspect-square bg-ink text-white p-12 flex flex-col justify-end">
-            <p className="text-6xl font-display">AI</p>
+          <div className="aspect-square bg-ink text-white p-6 sm:p-12 flex flex-col justify-end">
+            <p className="text-4xl sm:text-6xl font-display">AI</p>
             <p className="micro-label">We build for future Technology</p>
           </div>
         </div>
@@ -375,7 +383,7 @@ const Services = () => {
       <div className="absolute bottom-0 left-1/4 w-[60%] h-[60%] bg-blue-400/5 blur-[150px] rounded-full pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto">
-        <div className="text-center mb-24">
+        <div className="text-center mb-16 sm:mb-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -383,7 +391,7 @@ const Services = () => {
             transition={{ duration: 0.6 }}
           >
             <span className="text-brand font-bold uppercase tracking-[0.2em] text-xs mb-4 block">Our Expertise</span>
-            <h2 className="text-5xl lg:text-6xl font-bold tracking-tight text-ink mb-8">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-ink mb-6 sm:mb-8">
               Solutions for the <span className="text-brand">modern age.</span>
             </h2>
             <p className="text-lg text-ink/50 max-w-2xl mx-auto leading-relaxed">
@@ -402,7 +410,7 @@ const Services = () => {
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1, duration: 0.6 }}
               whileHover={{ y: -10 }}
-              className={`group relative p-10 bg-white/40 backdrop-blur-2xl backdrop-saturate-200 rounded-[32px] border border-white/60 shadow-[0_8px_32px_0_rgba(31,38,135,0.05)] hover:bg-white/60 hover:shadow-[0_8px_32px_0_rgba(31,38,135,0.1)] transition-all duration-500 overflow-hidden ${s.link ? 'cursor-pointer' : ''}`}
+              className={`group relative p-8 sm:p-10 bg-white/40 backdrop-blur-2xl backdrop-saturate-200 rounded-[32px] border border-white/60 shadow-[0_8px_32px_0_rgba(31,38,135,0.05)] hover:bg-white/60 hover:shadow-[0_8px_32px_0_rgba(31,38,135,0.1)] transition-all duration-500 overflow-hidden ${s.link ? 'cursor-pointer' : ''}`}
             >
               {/* Liquid Glass Reflection */}
               <div className="absolute inset-0 bg-gradient-to-br from-white/80 via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
@@ -436,7 +444,7 @@ const Services = () => {
 const Resources = () => (
   <section id="resources" className="py-24 lg:py-48 px-6 lg:px-12">
     <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-24 gap-8">
-      <h2 className="text-7xl lg:text-[10vw] font-display uppercase leading-[0.8]">Journal</h2>
+      <h2 className="text-5xl sm:text-6xl lg:text-[10vw] font-display uppercase leading-[0.8]">Journal</h2>
       <div className="max-w-xs">
         <p className="text-sm opacity-60 mb-6">Deep dives into technology, education, and the future of business.</p>
         <a href="#" className="micro-label border-b border-ink pb-1">View all entries</a>
@@ -452,69 +460,6 @@ const Resources = () => (
           </div>
         </div>
       ))}
-    </div>
-  </section>
-);
-
-const Partners = () => (
-  <section id="partners" className="py-24 lg:py-48 px-6 lg:px-12 bg-white">
-    <div className="max-w-7xl mx-auto">
-      <div className="flex flex-col lg:flex-row justify-between items-end gap-12 mb-24">
-        <div className="max-w-2xl">
-          <h2 className="text-6xl lg:text-8xl font-display uppercase leading-none tracking-tighter">
-            Technology <br />
-            <span className="text-brand">Integration</span>
-          </h2>
-        </div>
-        <p className="text-slate-500 max-w-sm text-lg leading-relaxed">
-          We use the world's most ambitious organization's technologies to define the future of digital infrastructure.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-ink/5 border border-ink/5">
-        {[
-          { name: "Google", industry: "Cloud & Search", logo: "google.com" },
-          { name: "OpenAI", industry: "Artificial Intelligence", logo: "openai.com" },
-          { name: "Apple", industry: "Consumer Electronics", logo: "apple.com" },
-          { name: "Supabase", industry: "Backend as a Service", logo: "supabase.com" },
-          { name: "PostgreSQL", industry: "Database Management", logo: "postgresql.org" },
-          { name: "Microsoft", industry: "Software & Cloud", logo: "microsoft.com" },
-          { name: "Meta", industry: "Social Technology", logo: "meta.com" },
-          { name: "Claude AI", industry: "Artificial Intelligence", logo: "claude.ai" }
-        ].map((partner, i) => (
-          <motion.div
-            key={partner.name}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: i * 0.1 }}
-            className="bg-white p-12 lg:p-16 flex flex-col items-center justify-center text-center group cursor-pointer hover:bg-brand-light transition-colors"
-          >
-            <div className="w-20 h-20 mb-8 flex items-center justify-center bg-slate-50 rounded-2xl p-4 group-hover:bg-white transition-colors shadow-sm">
-              <img
-                src={`https://logo.clearbit.com/${partner.logo}`}
-                alt={partner.name}
-                className="max-w-full max-h-full object-contain"
-                referrerPolicy="no-referrer"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src = `https://www.google.com/s2/favicons?domain=${partner.logo}&sz=128`;
-                }}
-              />
-            </div>
-            <h3 className="text-xl font-bold tracking-tight mb-2">{partner.name}</h3>
-            <p className="micro-label opacity-40">{partner.industry}</p>
-          </motion.div>
-        ))}
-      </div>
-
-      <div className="mt-24 p-12 lg:p-24 bg-ink text-white rounded-2xl flex flex-col lg:flex-row items-center justify-between gap-12">
-        <div className="max-w-xl">
-          <h3 className="text-4xl lg:text-5xl font-display uppercase mb-6 leading-tight">Become a <br /> Strategic Partner</h3>
-          <p className="text-white/60 text-lg">Join our ecosystem of innovators and help us build the next generation of digital excellence.</p>
-        </div>
-        <a href="mailto:plumeriantech@gmail.com" className="px-12 py-6 bg-brand text-ink font-bold uppercase tracking-widest text-xs rounded-full hover:bg-white transition-all whitespace-nowrap inline-block text-center">
-          Apply for Partnership
-        </a>
-      </div>
     </div>
   </section>
 );
@@ -538,7 +483,7 @@ const Contact = () => {
         <div className="lg:col-span-5 flex flex-col justify-between">
           <div>
             <p className="micro-label text-brand mb-8">03 / Contact</p>
-            <h2 className="text-7xl lg:text-[10vw] font-display uppercase leading-[0.85] mb-12 tracking-tighter">
+            <h2 className="text-4xl sm:text-6xl lg:text-[10vw] font-display uppercase leading-[0.85] mb-10 sm:mb-12 tracking-tighter">
               Start <br />
               <span className="text-brand">Something</span> <br />
               New.
@@ -546,10 +491,10 @@ const Contact = () => {
           </div>
 
           <div className="space-y-12">
-            <div className="grid grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 gap-8">
               <div className="space-y-4">
                 <p className="micro-label text-white/40">Inquiries</p>
-                <a href="mailto:plumeriantech@gmail.com" className="text-lg hover:text-brand transition-colors">plumeriantech@gmail.com</a>
+                <a href="mailto:plumeriantech@gmail.com" className="text-base sm:text-lg hover:text-brand transition-colors break-all">plumeriantech@gmail.com</a>
               </div>
             </div>
 
@@ -567,7 +512,7 @@ const Contact = () => {
         </div>
 
         <div className="lg:col-span-7">
-          <div className="bg-white/5 backdrop-blur-sm p-8 lg:p-16 rounded-2xl border border-white/10">
+          <div className="bg-white/5 backdrop-blur-sm p-6 sm:p-8 lg:p-16 rounded-2xl border border-white/10">
             <form className="space-y-10" onSubmit={handleSubmit}>
               <div className="grid md:grid-cols-2 gap-10">
                 <div className="space-y-2">
@@ -638,14 +583,14 @@ const Contact = () => {
 };
 
 const Footer = () => (
-  <footer className="py-12 px-6 lg:px-12 border-t border-ink/10 flex flex-col lg:flex-row justify-between items-center gap-8">
+  <footer className="py-12 px-6 lg:px-12 border-t border-ink/10 flex flex-col lg:flex-row justify-between items-center gap-6 sm:gap-8 text-center lg:text-left">
     <Logo />
-    <div className="flex gap-12 micro-label">
+    <div className="flex flex-wrap justify-center gap-6 sm:gap-12 micro-label">
       <a href="#" className="hover:text-brand transition-colors">Instagram</a>
       <a href="https://www.facebook.com/share/p/1BhmdUNGjD/" className="hover:text-brand transition-colors">Facebook</a>
       <a href="#" className="hover:text-brand transition-colors">Twitter</a>
     </div>
-    <p className="micro-label opacity-40">© 2026 Plumerian Tech. All Rights Reserved.</p>
+    <p className="micro-label opacity-40">© 2026 Plumeria Tech. All Rights Reserved.</p>
   </footer>
 );
 
@@ -815,13 +760,13 @@ const Leadership = () => {
 
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-24 mb-24">
           <div className="lg:col-span-7">
-            <h1 className="text-7xl lg:text-[12vw] font-display uppercase leading-[0.8] tracking-tighter mb-12">
+            <h1 className="text-4xl sm:text-6xl lg:text-[12vw] font-display uppercase leading-[0.8] tracking-tighter mb-8 sm:mb-12">
               The <br />
               <span className="text-brand">Visionaries</span>
             </h1>
           </div>
           <div className="lg:col-span-5 flex items-end">
-            <p className="text-xl text-slate-500 leading-relaxed">
+            <p className="text-base sm:text-xl text-slate-500 leading-relaxed">
               Our leadership team is comprised of polymaths, engineers, and designers dedicated to the pursuit of digital excellence.
             </p>
           </div>
@@ -905,16 +850,11 @@ const WhoWeService = () => {
         </button>
 
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-24 mb-24">
-          <div className="lg:col-span-7">
-            <h1 className="text-7xl lg:text-[12vw] font-display uppercase leading-[0.8] tracking-tighter mb-12">
+          <div className="lg:col-span-12">
+            <h1 className="text-4xl sm:text-6xl lg:text-[12vw] font-display uppercase leading-[0.8] tracking-tighter mb-8 sm:mb-12">
               Who We <br />
               <span className="text-brand">Service</span>
             </h1>
-          </div>
-          <div className="lg:col-span-5 flex items-end">
-            <p className="text-xl text-slate-500 leading-relaxed">
-              From progressive academic institutions to Fortune 500 enterprises, we build the technological foundation for the future.
-            </p>
           </div>
         </div>
 
@@ -925,7 +865,7 @@ const WhoWeService = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
-              className="group p-10 bg-[#f8f9fa] rounded-[32px] border border-ink/5 hover:bg-white hover:shadow-2xl hover:shadow-brand/10 transition-all duration-500"
+              className="group p-8 sm:p-10 bg-[#f8f9fa] rounded-[32px] border border-ink/5 hover:bg-white hover:shadow-2xl hover:shadow-brand/10 transition-all duration-500"
             >
               <div className="transform group-hover:scale-110 transition-transform duration-500 origin-left">
                 {service.icon}
@@ -985,13 +925,13 @@ const Events = () => {
 
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-24 mb-24">
           <div className="lg:col-span-7">
-            <h1 className="text-7xl lg:text-[12vw] font-display uppercase leading-[0.8] tracking-tighter mb-12">
+            <h1 className="text-4xl sm:text-6xl lg:text-[12vw] font-display uppercase leading-[0.8] tracking-tighter mb-8 sm:mb-12">
               Upcoming <br />
               <span className="text-brand">Events</span>
             </h1>
           </div>
           <div className="lg:col-span-5 flex items-end">
-            <p className="text-xl text-white/50 leading-relaxed">
+            <p className="text-base sm:text-xl text-white/50 leading-relaxed">
               Connect with pioneers, learn from experts, and participate in defining the next era of technological advancement.
             </p>
           </div>
@@ -1021,89 +961,10 @@ const Events = () => {
                 </div>
 
                 <div className="lg:col-span-3 flex justify-start lg:justify-end">
-                  <button className="px-8 py-4 bg-transparent border border-white/20 text-white rounded-full text-xs font-bold uppercase tracking-widest hover:bg-brand hover:border-brand transition-all duration-300">
+                  <button className="px-8 py-4 bg-transparent border border-white/20 text-white rounded-full text-xs font-bold uppercase tracking-widest hover:bg-brand hover:border-brand transition-all duration-300 w-full sm:w-auto">
                     Register Now
                   </button>
                 </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
-const Awards = () => {
-  const navigate = useNavigate();
-
-  const awards = [
-    {
-      id: "ai-pioneer",
-      title: "AI Integration Pioneer",
-      organization: "Tech Innovators Network",
-      year: "2026",
-      desc: "Honored for our cutting-edge ethical AI frameworks in predictive organizational analytics.",
-    }
-  ];
-
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="min-h-screen bg-slate-50 pt-32 pb-24 px-6 lg:px-12"
-    >
-      <div className="max-w-7xl mx-auto">
-        <button
-          onClick={() => {
-            navigate('/');
-            setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100);
-          }}
-          className="relative inline-flex items-center gap-2 px-6 py-3 bg-brand text-white text-xs font-bold uppercase tracking-widest rounded-full mb-12 hover:scale-105 shadow-[0_8px_16px_rgba(78,165,157,0.4),inset_0_2px_4px_rgba(255,255,255,0.5),inset_0_-2px_4px_rgba(0,0,0,0.1)] border border-white/20 transition-all duration-300 group cursor-pointer"
-        >
-          <span className="flex items-center gap-2 pointer-events-none">
-            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Back to Home
-          </span>
-        </button>
-
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-24 mb-24">
-          <div className="lg:col-span-7">
-            <h1 className="text-7xl lg:text-[12vw] font-display uppercase leading-[0.8] tracking-tighter mb-12 text-ink">
-              Industry <br />
-              <span className="text-brand">Awards</span>
-            </h1>
-          </div>
-          <div className="lg:col-span-5 flex items-end">
-            <p className="text-xl text-slate-500 leading-relaxed">
-              Our commitment to engineering excellence and disruptive innovation has been recognized globally by leading institutions.
-            </p>
-          </div>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {awards.map((award, i) => (
-            <motion.div
-              key={award.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
-              className="group p-10 bg-white rounded-[32px] border border-ink/5 hover:shadow-2xl hover:shadow-brand/5 transition-all duration-500 relative overflow-hidden flex flex-col justify-between"
-            >
-              <div className="relative z-10 mb-12">
-                <div className="flex items-center gap-4 mb-6">
-                  <span className="w-12 h-12 flex items-center justify-center bg-brand/10 text-brand rounded-full font-bold text-sm">
-                    {award.year}
-                  </span>
-                  <p className="micro-label text-slate-400">{award.organization}</p>
-                </div>
-                <h3 className="text-2xl font-bold tracking-tight text-ink mb-4 group-hover:text-brand transition-colors">{award.title}</h3>
-                <p className="text-slate-500 leading-relaxed">{award.desc}</p>
-              </div>
-
-              <div className="relative z-10">
-                <div className="h-px w-full bg-slate-100 mb-6 group-hover:bg-brand/20 transition-colors" />
-                <p className="text-[10px] font-bold uppercase tracking-widest text-brand">Excellence Recognized</p>
               </div>
             </motion.div>
           ))}
@@ -1123,7 +984,7 @@ const SmsLms = () => {
       exit={{ opacity: 0 }}
       className="min-h-screen bg-slate-50 pt-32 pb-24 px-6 lg:px-12 relative overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto space-y-32 relative z-10">
+      <div className="max-w-7xl mx-auto space-y-20 sm:space-y-24 lg:space-y-32 relative z-10">
 
         {/* Header & Back */}
         <div>
@@ -1139,17 +1000,17 @@ const SmsLms = () => {
             </span>
           </button>
 
-          <div className="bg-[#4ea59d] text-white p-12 lg:p-24 rounded-[32px] shadow-2xl relative overflow-hidden group">
+          <div className="bg-[#4ea59d] text-white p-8 sm:p-12 lg:p-24 rounded-[32px] shadow-2xl relative overflow-hidden group">
             <div className="absolute inset-0 bg-gradient-to-br from-brand/20 to-[rgba(78,165,157,0.5)] opacity-50 mix-blend-multiply" />
             <div className="relative z-10 max-w-3xl">
-              <h1 className="text-7xl lg:text-[10vw] font-display uppercase tracking-tighter mb-4 leading-[0.85]">
+              <h1 className="text-5xl sm:text-6xl lg:text-[10vw] font-display uppercase tracking-tighter mb-4 leading-[0.85]">
                 IEM
               </h1>
-              <h2 className="text-3xl lg:text-5xl font-light mb-8 opacity-90 tracking-tight">
+              <h2 className="text-2xl sm:text-3xl lg:text-5xl font-light mb-6 sm:mb-8 opacity-90 tracking-tight">
                 Learning Management System
               </h2>
               <div className="h-px w-24 bg-white/20 mb-8" />
-              <p className="text-xl font-mono uppercase tracking-[0.2em] text-brand-light">
+              <p className="text-sm sm:text-base lg:text-xl font-mono uppercase tracking-[0.12em] sm:tracking-[0.2em] text-brand-light">
                 Where Education Meets Innovation
               </p>
             </div>
@@ -1164,7 +1025,7 @@ const SmsLms = () => {
           <div className="lg:col-span-5 space-y-8">
             <div>
               <p className="micro-label text-brand mb-4">About IEM</p>
-              <h3 className="text-4xl lg:text-5xl font-display uppercase tracking-tighter text-ink mb-6 leading-tight">A Smarter Way to <span className="text-brand">Teach</span> and <span className="text-brand">Learn</span></h3>
+              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-display uppercase tracking-tighter text-ink mb-6 leading-tight">A Smarter Way to <span className="text-brand">Teach</span> and <span className="text-brand">Learn</span></h3>
             </div>
             <div className="space-y-6 text-slate-600 text-lg leading-relaxed">
               <p>
@@ -1194,7 +1055,7 @@ const SmsLms = () => {
         <div>
           <div className="text-center max-w-3xl mx-auto mb-16">
             <p className="micro-label text-brand mb-4">Platform Features</p>
-            <h3 className="text-4xl lg:text-5xl font-display uppercase tracking-tighter text-ink mb-6">Everything You Need, <br /><span className="text-brand">in One Platform</span></h3>
+            <h3 className="text-3xl sm:text-4xl lg:text-5xl font-display uppercase tracking-tighter text-ink mb-6">Everything You Need, <br /><span className="text-brand">in One Platform</span></h3>
             <p className="text-slate-500 leading-relaxed text-lg">
               IEM brings together a powerful suite of tools to support teaching, learning, and administration across your institution.
             </p>
@@ -1228,7 +1089,7 @@ const SmsLms = () => {
           <div className="lg:col-span-5 space-y-8">
             <div>
               <p className="micro-label text-brand mb-4">Who It's For</p>
-              <h3 className="text-4xl lg:text-5xl font-display uppercase tracking-tighter text-ink mb-6 leading-tight">Built for <span className="text-brand">Schools</span> and <span className="text-brand">Universities</span></h3>
+              <h3 className="text-3xl sm:text-4xl lg:text-5xl font-display uppercase tracking-tighter text-ink mb-6 leading-tight">Built for <span className="text-brand">Schools</span> and <span className="text-brand">Universities</span></h3>
             </div>
             <p className="text-slate-600 leading-relaxed text-xl">
               <strong className="text-ink">IEM</strong> is purpose-designed to serve the needs of academic institutions — from primary schools to higher education establishments.
@@ -1262,13 +1123,13 @@ const SmsLms = () => {
           <div className="absolute top-0 right-0 w-full h-full bg-[url('https://picsum.photos/seed/tech1/1920/1080')] opacity-[0.03] mix-blend-overlay pointer-events-none" />
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand/30 blur-[150px] rounded-full pointer-events-none" />
 
-          <div className="relative z-10 p-12 lg:p-24">
+          <div className="relative z-10 p-8 sm:p-12 lg:p-24">
             <div className="text-center max-w-3xl mx-auto mb-20">
-              <h2 className="text-4xl lg:text-5xl font-display uppercase tracking-tighter mb-6">Trusted by Educators. <br /><span className="text-brand">Proven by Results.</span></h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display uppercase tracking-tighter mb-6">Trusted by Educators. <br /><span className="text-brand">Proven by Results.</span></h2>
               <p className="text-white/80 text-xl flex justify-center items-center">IEM is designed to create measurable outcomes for students and institutions alike.</p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8 text-center mb-20">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 text-center mb-12 sm:mb-20">
               <div className="p-8 border border-white/10 rounded-[24px] bg-white/5 backdrop-blur-sm">
                 <p className="text-6xl font-display font-bold mb-4 text-brand-light">100%</p>
                 <p className="text-lg font-mono uppercase tracking-widest text-white/60">Mobile Accessible</p>
@@ -1283,7 +1144,7 @@ const SmsLms = () => {
               </div>
             </div>
 
-            <div className="max-w-4xl mx-auto bg-white/5 rounded-[32px] p-10 lg:p-16 border border-white/10 backdrop-blur-md">
+            <div className="max-w-4xl mx-auto bg-white/5 rounded-[32px] p-8 sm:p-10 lg:p-16 border border-white/10 backdrop-blur-md">
               <h3 className="text-2xl font-bold mb-8">Key advantages of choosing IEM:</h3>
               <ul className="grid md:grid-cols-2 gap-x-12 gap-y-6">
                 {[
@@ -1304,17 +1165,20 @@ const SmsLms = () => {
         </div>
 
         {/* Get Started Section */}
-        <div className="bg-ink p-12 lg:p-24 rounded-[40px] text-white relative overflow-hidden flex flex-col lg:flex-row gap-16 justify-between items-center shadow-xl">
+        <div className="bg-ink p-8 sm:p-12 lg:p-24 rounded-[40px] text-white relative overflow-hidden flex flex-col lg:flex-row gap-10 sm:gap-16 justify-between items-start lg:items-center shadow-xl">
           <div className="absolute right-0 bottom-0 w-1/2 h-full bg-gradient-to-l from-brand/50 to-transparent pointer-events-none" />
           <div className="relative z-10 max-w-2xl">
             <p className="micro-label text-brand mb-4">Get Started with IEM</p>
-            <h2 className="text-5xl lg:text-6xl font-display uppercase tracking-tighter mb-6">Ready to <span className="text-brand">Transform</span> Your Institution?</h2>
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display uppercase tracking-tighter mb-6">Ready to <span className="text-brand">Transform</span> Your Institution?</h2>
             <p className="text-white/60 text-xl leading-relaxed">
               Discover how IEM can modernise your learning environment, improve student outcomes, and simplify administration — from day one.
             </p>
           </div>
           <div className="relative z-10 flex flex-col sm:flex-row gap-6 shrink-0 w-full lg:w-auto">
-            <button className="px-10 py-5 bg-brand text-white rounded-full font-bold uppercase tracking-widest text-xs hover:bg-ink transition-all hover:-translate-y-1 shadow-lg border border-white/10 flex items-center justify-center gap-3 group">
+            <button
+              onClick={openDemoEmail}
+              className="px-10 py-5 bg-brand text-white rounded-full font-bold uppercase tracking-widest text-xs hover:bg-ink transition-all hover:-translate-y-1 shadow-lg border border-white/10 flex items-center justify-center gap-3 group"
+            >
               Request a Demo <ArrowUpRight size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
             </button>
           </div>
@@ -1334,7 +1198,7 @@ const IemLab = () => {
       exit={{ opacity: 0 }}
       className="min-h-screen bg-white pt-32 pb-24 px-6 lg:px-12 relative overflow-hidden"
     >
-      <div className="max-w-6xl mx-auto space-y-32 relative z-10">
+      <div className="max-w-6xl mx-auto space-y-20 sm:space-y-24 lg:space-y-32 relative z-10">
 
         {/* Header & Back */}
         <div>
@@ -1352,7 +1216,7 @@ const IemLab = () => {
         {/* Hero Section */}
         <div className="text-center space-y-8 max-w-4xl mx-auto">
           <p className="font-bold uppercase tracking-[0.2em] text-brand text-sm">IEM VIRTUAL SCIENCE LAB</p>
-          <h1 className="text-5xl lg:text-7xl font-bold tracking-tight text-ink pb-2">Explore Science Without Limits</h1>
+          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight text-ink pb-2">Explore Science Without Limits</h1>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
             A fully interactive virtual laboratory designed for K-12 students — bringing Biology, Chemistry, and Physics experiments to life, safely and accessibly, from any device.
           </p>
@@ -1365,7 +1229,7 @@ const IemLab = () => {
         {/* About The Lab */}
         <div className="pt-16 border-t border-slate-200 space-y-8">
           <p className="font-bold uppercase tracking-[0.2em] text-brand text-sm">ABOUT THE LAB</p>
-          <h2 className="text-3xl lg:text-5xl font-bold tracking-tight text-ink mb-2">Science, reimagined for the classroom</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold tracking-tight text-ink mb-2">Science, reimagined for the classroom</h2>
           <div className="space-y-6 text-slate-600 text-lg leading-relaxed max-w-5xl">
             <p>
               The IEM Virtual Science Lab gives K-12 students the freedom to conduct real experiments in a safe, immersive digital environment. Whether dissecting cells, mixing chemical compounds, or exploring the laws of motion, students engage with science the way it was meant to be experienced — hands-on.
@@ -1380,7 +1244,7 @@ const IemLab = () => {
         <div className="pt-16 border-t border-slate-200 space-y-12">
           <div className="space-y-4">
             <p className="font-bold uppercase tracking-[0.2em] text-brand text-sm">SUBJECTS COVERED</p>
-            <h2 className="text-3xl lg:text-5xl font-bold tracking-tight text-ink">Four disciplines. One platform.</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold tracking-tight text-ink">Four disciplines. One platform.</h2>
             <p className="text-slate-600 text-lg">The lab covers three core science disciplines and Information Technology, with hands-on labs and experiments tailored to K-12 learning levels.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -1403,7 +1267,7 @@ const IemLab = () => {
         <div className="pt-16 border-t border-slate-200 space-y-12">
           <div className="space-y-4">
             <p className="font-bold uppercase tracking-[0.2em] text-brand text-sm">PLATFORM FEATURES</p>
-            <h2 className="text-3xl lg:text-5xl font-bold tracking-tight text-ink mb-2">Built for learning. Designed for safety.</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold tracking-tight text-ink mb-2">Built for learning. Designed for safety.</h2>
             <p className="text-slate-600 text-lg">Every feature of the IEM Virtual Science Lab is designed to maximise learning outcomes for K-12 students.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -1427,7 +1291,7 @@ const IemLab = () => {
         <div className="pt-16 border-t border-slate-200 space-y-12">
           <div className="space-y-4">
             <p className="font-bold uppercase tracking-[0.2em] text-brand text-sm">SAMPLE EXPERIMENTS</p>
-            <h2 className="text-3xl lg:text-5xl font-bold tracking-tight text-ink">What students will explore</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold tracking-tight text-ink">What students will explore</h2>
             <p className="text-slate-600 text-lg">From foundational concepts to advanced investigations, the lab offers a growing library of hands-on experiments.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -1454,9 +1318,9 @@ const IemLab = () => {
         <div className="pt-16 border-t border-slate-200 space-y-12 pb-12">
           <div className="space-y-4">
             <p className="font-bold uppercase tracking-[0.2em] text-brand text-sm">WHY IT WORKS</p>
-            <h2 className="text-3xl lg:text-5xl font-bold tracking-tight text-ink mb-8">Learning outcomes that matter</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold tracking-tight text-ink mb-8">Learning outcomes that matter</h2>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center mb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center mb-16">
             <div className="py-12 bg-slate-50 rounded-[24px] border border-slate-100 shadow-sm">
               <p className="text-5xl font-bold mb-3 text-brand">4</p>
               <p className="text-slate-500 text-sm uppercase tracking-widest font-bold">Core subjects</p>
@@ -1475,15 +1339,15 @@ const IemLab = () => {
             </div>
           </div>
 
-          <div className="p-12 lg:p-20 border border-brand/20 bg-brand/5 rounded-[40px] text-center max-w-4xl mx-auto space-y-10 shadow-lg relative overflow-hidden group">
+          <div className="p-8 sm:p-12 lg:p-20 border border-brand/20 bg-brand/5 rounded-[40px] text-center max-w-4xl mx-auto space-y-8 sm:space-y-10 shadow-lg relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-tr from-transparent via-brand/5 to-transparent pointer-events-none group-hover:scale-105 transition-transform duration-1000" />
-            <h2 className="text-3xl lg:text-5xl font-bold relative z-10 text-ink tracking-tight">Bring the lab to every student</h2>
+            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold relative z-10 text-ink tracking-tight">Bring the lab to every student</h2>
             <p className="text-slate-600 text-lg leading-relaxed relative z-10 max-w-2xl mx-auto">
               Give your students access to world-class science experiences — no equipment, no hazards, no limits. The IEM Virtual Science Lab is ready for your school.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 relative z-10">
               <button
-                onClick={() => navigate('/#contact')}
+                onClick={openDemoEmail}
                 className="px-10 py-5 bg-brand text-white border border-transparent rounded-[16px] hover:brightness-110 transition-all font-bold shadow-lg shadow-brand/20 w-full sm:w-auto"
               >
                 Request a Demo
@@ -1534,7 +1398,7 @@ const BusinessPlans = () => {
         </div>
 
         {/* Hero Section */}
-        <div className="bg-[#191924] text-white p-12 lg:p-24 rounded-[32px] shadow-2xl relative overflow-hidden group mb-12 lg:mb-32 flex flex-col items-center text-center">
+        <div className="bg-[#191924] text-white p-8 sm:p-12 lg:p-24 rounded-[32px] shadow-2xl relative overflow-hidden group mb-12 lg:mb-32 flex flex-col items-center text-center">
           <div className="absolute inset-0 bg-gradient-to-br from-[#191924] to-[#252536] opacity-90" />
           <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none flex items-center justify-center opacity-30">
             <div className="w-[800px] h-[800px] bg-[#4ea59d] blur-[150px] mix-blend-screen rounded-full" />
@@ -1542,7 +1406,7 @@ const BusinessPlans = () => {
 
           <div className="relative z-10 max-w-4xl mx-auto px-4 flex flex-col items-center">
             <h1 className="text-sm font-bold tracking-[0.2em] uppercase text-white/50 mb-4">BUSINESS MACHINE</h1>
-            <h2 className="text-5xl lg:text-7xl font-bold tracking-tight mb-8 leading-[1.1] text-white">
+            <h2 className="text-3xl sm:text-5xl lg:text-7xl font-bold tracking-tight mb-8 leading-[1.1] text-white">
               Operate smarter. Deliver faster. <br className="hidden lg:block" />
               Scale with confidence.
             </h2>
@@ -1555,10 +1419,10 @@ const BusinessPlans = () => {
         {/* About Section */}
         <div className="max-w-4xl mx-auto text-left w-full">
           <p className="font-bold tracking-[0.2em] uppercase text-[#4ea59d] text-sm mb-6">ABOUT BUSINESS MACHINE</p>
-          <h2 className="text-4xl lg:text-5xl font-bold tracking-tight text-ink mb-10">Where operational excellence begins</h2>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-ink mb-10">Where operational excellence begins</h2>
           <div className="space-y-6 text-slate-600 text-lg lg:text-xl leading-relaxed font-light">
             <p>
-              Business Machine is a powerful module within the Plumerian platform, purpose-built for business professionals who need to manage complex operations at scale. It brings together project management, industrial robotics coordination, and network infrastructure management into a single, unified workspace.
+              Business Machine is a powerful module within the Plumeria platform, purpose-built for business professionals who need to manage complex operations at scale. It brings together project management, industrial robotics coordination, and network infrastructure management into a single, unified workspace.
             </p>
             <p>
               Whether you are overseeing a large-scale project pipeline, coordinating robotic systems on the production floor, or monitoring your organisation's network health, Business Machine gives you the clarity, control, and tools to perform at the highest level.
@@ -1571,7 +1435,7 @@ const BusinessPlans = () => {
         {/* Core Modules */}
         <div className="mx-auto w-full">
           <p className="font-bold tracking-[0.2em] uppercase text-[#4ea59d] text-sm mb-4">CORE MODULES</p>
-          <h2 className="text-4xl lg:text-5xl font-bold tracking-tight text-ink mb-6">Three powerful capabilities. One platform.</h2>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-ink mb-6">Three powerful capabilities. One platform.</h2>
           <p className="text-slate-600 text-lg mb-12 font-light max-w-3xl">
             Business Machine is built around three core disciplines that drive modern industrial and professional operations.
           </p>
@@ -1601,7 +1465,7 @@ const BusinessPlans = () => {
         {/* Platform Features */}
         <div className="mx-auto w-full">
           <p className="font-bold tracking-[0.2em] uppercase text-[#4ea59d] text-sm mb-4">PLATFORM FEATURES</p>
-          <h2 className="text-4xl lg:text-5xl font-bold tracking-tight text-ink mb-6">Built for professionals who mean business</h2>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-ink mb-6">Built for professionals who mean business</h2>
           <p className="text-slate-600 text-lg mb-16 font-light max-w-3xl">
             Business Machine is packed with features that keep operations running smoothly and teams performing at their peak.
           </p>
@@ -1628,7 +1492,7 @@ const BusinessPlans = () => {
         {/* Use Cases */}
         <div className="mx-auto w-full">
           <p className="font-bold tracking-[0.2em] uppercase text-[#4ea59d] text-sm mb-4">USE CASES</p>
-          <h2 className="text-4xl lg:text-5xl font-bold tracking-tight text-ink mb-6">Who uses Business Machine</h2>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-ink mb-6">Who uses Business Machine</h2>
           <p className="text-slate-600 text-lg mb-16 font-light max-w-3xl">
             Business Machine serves professionals across a range of operational roles and industries.
           </p>
@@ -1654,14 +1518,14 @@ const BusinessPlans = () => {
         {/* Why Business Machine */}
         <div className="mx-auto w-full">
           <p className="font-bold tracking-[0.2em] uppercase text-[#4ea59d] text-sm mb-4">WHY BUSINESS MACHINE</p>
-          <h2 className="text-4xl lg:text-5xl font-bold tracking-tight text-ink mb-12">Engineered for impact</h2>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-ink mb-12">Engineered for impact</h2>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             {[
               { stat: '3', label: 'Core modules' },
               { stat: '1', label: 'Unified platform' },
               { stat: 'Real-time', label: 'Monitoring & alerts' },
-              { stat: 'PLUMERIAN', label: 'Fully integrated' },
+              { stat: 'PLUMERIA', label: 'Fully integrated' },
             ].map((stat, i) => (
               <div key={i} className="py-12 px-6 bg-[#181824] rounded-[24px] text-center flex flex-col items-center justify-center">
                 <p className="text-4xl font-bold text-white mb-2">{stat.stat}</p>
@@ -1673,7 +1537,7 @@ const BusinessPlans = () => {
 
         {/* Call To Action */}
         <div className="mt-20 w-full text-center py-16 lg:py-24 bg-white rounded-[40px] px-6 border border-slate-200 shadow-sm max-w-5xl mx-auto">
-          <h2 className="text-4xl lg:text-5xl font-bold text-ink tracking-tight mb-8">Ready to put your business in motion?</h2>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-ink tracking-tight mb-8">Ready to put your business in motion?</h2>
           <p className="text-lg text-slate-600 font-light max-w-2xl mx-auto mb-12 leading-relaxed">
             Business Machine gives your team the tools to manage projects, control industrial systems, and secure your network — all within the IEM platform you already know.
           </p>
@@ -1711,7 +1575,7 @@ const AiSolutions = () => {
 
       {/* Hero */}
       <div className="max-w-6xl mx-auto px-6 lg:px-12 mb-24 mt-6">
-        <div className="bg-[#10172A] rounded-[40px] text-center p-12 lg:p-24 relative overflow-hidden text-white shadow-xl">
+        <div className="bg-[#10172A] rounded-[40px] text-center p-8 sm:p-12 lg:p-24 relative overflow-hidden text-white shadow-xl">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-brand/20 via-[#10172A] to-[#10172A]"></div>
           <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-brand/10 blur-[100px] rounded-full" />
           <div className="relative z-10">
@@ -1719,7 +1583,7 @@ const AiSolutions = () => {
               <span className="w-1.5 h-1.5 bg-brand rounded-full"></span>
               AI Solutions Services
             </span>
-            <h1 className="text-4xl lg:text-6xl font-bold tracking-tight mb-8 leading-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight mb-8 leading-tight">
               Intelligent solutions for a <br />
               <span className="text-brand">smarter world</span>
             </h1>
@@ -1750,7 +1614,7 @@ const AiSolutions = () => {
               Every solution is tailored to the unique needs of your sector, backed by proven AI capabilities and delivered by a team of specialists.
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {[
               { title: '3', subtitle: 'Sectors served' },
               { title: '5+', subtitle: 'AI capabilities' },
@@ -1780,7 +1644,7 @@ const AiSolutions = () => {
 
         <div className="space-y-8">
           {/* Education */}
-          <div className="p-10 border border-slate-200 rounded-[32px] bg-white">
+          <div className="p-6 sm:p-10 border border-slate-200 rounded-[32px] bg-white">
             <div className="flex items-center gap-3 mb-2">
               <div className="w-4 h-4 rounded-full bg-blue-500"></div>
               <h3 className="text-2xl font-bold text-ink">Education</h3>
@@ -1804,7 +1668,7 @@ const AiSolutions = () => {
           </div>
 
           {/* Business */}
-          <div className="p-10 border border-slate-200 rounded-[32px] bg-white">
+          <div className="p-6 sm:p-10 border border-slate-200 rounded-[32px] bg-white">
             <div className="flex items-center gap-3 mb-2">
               <div className="w-4 h-4 rounded-full bg-orange-500"></div>
               <h3 className="text-2xl font-bold text-ink">Business</h3>
@@ -1828,7 +1692,7 @@ const AiSolutions = () => {
           </div>
 
           {/* Medical */}
-          <div className="p-10 border border-slate-200 rounded-[32px] bg-white">
+          <div className="p-6 sm:p-10 border border-slate-200 rounded-[32px] bg-white">
             <div className="flex items-center gap-3 mb-2">
               <div className="w-4 h-4 rounded-full bg-emerald-500"></div>
               <h3 className="text-2xl font-bold text-ink">Medical</h3>
@@ -1924,17 +1788,17 @@ const AiSolutions = () => {
 
       {/* Call to action */}
       <div className="max-w-5xl mx-auto px-6 lg:px-12 pb-24">
-        <div className="bg-[#10172A] rounded-[40px] text-center p-12 lg:p-24 text-white hover:shadow-xl transition-shadow relative overflow-hidden">
+        <div className="bg-[#10172A] rounded-[40px] text-center p-8 sm:p-12 lg:p-24 text-white hover:shadow-xl transition-shadow relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-brand/10 pointer-events-none"></div>
-          <h2 className="text-4xl lg:text-5xl font-bold tracking-tight mb-6">Ready to harness the power of AI?</h2>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-6">Ready to harness the power of AI?</h2>
           <p className="text-lg text-white/70 max-w-2xl mx-auto mb-12 leading-relaxed">
             Whether you are in education, business, or healthcare — we have the expertise and technology to transform your operations. Let's build something intelligent together.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <button className="px-8 py-4 rounded-[12px] bg-brand text-white font-bold hover:brightness-110 transition-all shadow-lg min-w-[200px]" onClick={() => navigate('/#contact')}>
+            <button className="px-8 py-4 rounded-[12px] bg-brand text-white font-bold hover:brightness-110 transition-all shadow-lg w-full sm:w-auto sm:min-w-[200px]" onClick={() => navigate('/#contact')}>
               Get Started Today
             </button>
-            <button className="px-8 py-4 rounded-[12px] bg-transparent border border-white/20 text-white font-bold hover:bg-white/10 transition-all min-w-[200px]" onClick={() => navigate('/#contact')}>
+            <button className="px-8 py-4 rounded-[12px] bg-transparent border border-white/20 text-white font-bold hover:bg-white/10 transition-all w-full sm:w-auto sm:min-w-[200px]" onClick={() => navigate('/#contact')}>
               Talk to an Expert
             </button>
           </div>
@@ -1948,7 +1812,7 @@ export default function App() {
   return (
     <Router>
       <ScrollHandler />
-      <div className="min-h-screen selection:bg-brand selection:text-white relative">
+      <div className="min-h-screen selection:bg-brand selection:text-white relative overflow-x-hidden">
         <BackgroundParticles />
         <MouseFollower />
         <Navbar />
@@ -1959,7 +1823,6 @@ export default function App() {
                 <Hero />
                 <About />
                 <Services />
-                <Partners />
                 <Resources />
                 <Contact />
               </>
@@ -1967,7 +1830,6 @@ export default function App() {
             <Route path="/leadership" element={<Leadership />} />
             <Route path="/who-we-service" element={<WhoWeService />} />
             <Route path="/events" element={<Events />} />
-            <Route path="/awards" element={<Awards />} />
             <Route path="/services/sms-lms" element={<SmsLms />} />
             <Route path="/services/iem-lab" element={<IemLab />} />
             <Route path="/services/business-plans" element={<BusinessPlans />} />
@@ -1979,5 +1841,3 @@ export default function App() {
     </Router>
   );
 }
-
-

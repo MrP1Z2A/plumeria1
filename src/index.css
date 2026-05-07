@@ -14,6 +14,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -21,6 +22,11 @@ body {
   color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
   position: relative;
+  overflow-x: hidden;
+}
+
+#root {
+  overflow-x: hidden;
 }
 
 body::before {
